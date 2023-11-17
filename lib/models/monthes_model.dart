@@ -3,7 +3,7 @@ class MonthesModel {
   final String name;
   final int price;
   final String freeStatus;
-  final ContentModel content;
+  final List<dynamic> content;
 
   MonthesModel(
       {required this.id,
@@ -18,7 +18,9 @@ class MonthesModel {
         name: jsonData['name'],
         price: jsonData['price'],
         freeStatus: jsonData['free_status'],
-        content: ContentModel.fromJson(jsonData['content']));
+        content: toList(parsedJson['content']),
+        // content: []
+        );
   }
 }
 
@@ -30,6 +32,11 @@ class ContentModel {
   ContentModel({required this.name, required this.id, required this.time});
 
   factory ContentModel.fromJson(jsonData) {
-    return ContentModel(id: jsonData['id'], name: jsonData['name'], time: jsonData['time']);
+    return ContentModel(
+        id: jsonData['id'], name: jsonData['name'], time: jsonData['time']);
   }
+}
+
+List<String> toList(List<dynamic> list) {
+  return List<String>.from(list);
 }

@@ -29,8 +29,8 @@ class VerticalScrollItems extends StatelessWidget {
                   width: 150,
                   child: Column(
                     children: [
-                      Text(monthes.content.name[index]),
-                      Text(monthes.content.time.toString()[index])
+                      // Text(monthes.content.name[index]),
+                      // Text(monthes.content.time.toString()[index])
                     ],
                   ),
                 )),

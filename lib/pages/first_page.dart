@@ -5,7 +5,9 @@ import 'package:task/widgets/scroll_row.dart';
 import 'package:task/widgets/vertical_scroll.dart';
 
 class FirstPage extends StatefulWidget {
-  const FirstPage({super.key});
+  //  FirstPage({super.key,this.monthes});
+
+  late MonthesModel monthes;
 
   @override
   State<FirstPage> createState() => _FirstPageState();
@@ -204,7 +206,7 @@ class _FirstPageState extends State<FirstPage> {
                             Text("إجمالي الطلب",
                                 style: TextStyle(fontWeight: FontWeight.bold)),
                             Text(
-                              "120 ج.م",
+                              '${monthes.price.toString()}',
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 decoration: TextDecoration.lineThrough,
@@ -245,15 +247,17 @@ class _FirstPageState extends State<FirstPage> {
                         ),
                       ],
                     );
-                  
                   } else if (snapshot.hasError) {
                     print(snapshot.error);
-                    // return const Center(
-                    //   child: CircularProgressIndicator(),
-                    // );
+                    return Center(
+                      child: Container(child: Text("there is an error")),
+                    );
+                  } else {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
                   }
-                }
-                )),
+                })),
       ),
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Color.fromARGB(255, 230, 230, 230),
