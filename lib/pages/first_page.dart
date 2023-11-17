@@ -5,15 +5,12 @@ import 'package:task/widgets/scroll_row.dart';
 import 'package:task/widgets/vertical_scroll.dart';
 
 class FirstPage extends StatefulWidget {
-  //  FirstPage({super.key,this.monthes});
-
-  late MonthesModel monthes;
+  FirstPage({super.key});
 
   @override
   State<FirstPage> createState() => _FirstPageState();
 }
 
-int selectedOption = 1;
 int _selectedIndex = 0;
 const List<Widget> _widgetOptions = <Widget>[
   Text('Home Page',
@@ -25,7 +22,12 @@ const List<Widget> _widgetOptions = <Widget>[
 ];
 
 class _FirstPageState extends State<FirstPage> {
-  int _selectedIndex = 0;
+  int _selectedMonth = 0;
+  int priceAfterDisc = 0;
+  bool buttonPressed = false;
+  final List<Color> colors = [Colors.green, Colors.blue, Colors.purple];
+
+
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static const List<Widget> _widgetOptions = <Widget>[
@@ -109,7 +111,24 @@ class _FirstPageState extends State<FirstPage> {
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
                     print(snapshot.error);
-                    List<MonthesModel> monthes = snapshot.data!;
+                    List<MonthesModel> monthess = snapshot.data!;
+                    void onButtonPressed() {
+                      setState(() {
+                        buttonPressed = true;
+                        priceAfterDisc = monthess[_selectedMonth].price - 30;
+                      });
+                    }
+
+                    void onSelectedIndexChanged(int? value) {
+                      if (value != null) {
+                        setState(() {
+                          buttonPressed = false;
+                          _selectedMonth = value;
+                          priceAfterDisc = monthess[_selectedMonth].price - 30;
+                        });
+                      }
+                    }
+
                     return Column(
                       children: [
                         Row(
@@ -125,7 +144,7 @@ class _FirstPageState extends State<FirstPage> {
                                       shape: BoxShape.circle),
                                 ),
                                 Positioned(
-                                  bottom: 9,
+                                  bottom: 2,
                                   child: Container(
                                     height: 1,
                                     width: 25,
@@ -159,7 +178,11 @@ class _FirstPageState extends State<FirstPage> {
                               itemCount: 3,
                               itemBuilder: (BuildContext context, int index) =>
                                   ScrollRow(
-                                    monthes: monthes[index],
+                                    colory: colors[index],
+                                    monthes: monthess[index + 7],
+                                    index: index,
+                                    selectedIndex: _selectedMonth,
+                                    onSelectedChanged: onSelectedIndexChanged,
                                   )),
                         ),
                         Material(
@@ -186,7 +209,9 @@ class _FirstPageState extends State<FirstPage> {
                                   ),
                                 ),
                                 TextButton(
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      onButtonPressed();
+                                    },
                                     child: Text(
                                       "استخدام",
                                       style: TextStyle(
@@ -206,12 +231,16 @@ class _FirstPageState extends State<FirstPage> {
                             Text("إجمالي الطلب",
                                 style: TextStyle(fontWeight: FontWeight.bold)),
                             Text(
-                              '${monthes.price.toString()}',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                decoration: TextDecoration.lineThrough,
-                                decorationColor: Colors.red,
-                              ),
+                              '${monthess[_selectedMonth].price.toString()} ج.م',
+                              style: buttonPressed
+                                  ? TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      decoration: TextDecoration.lineThrough,
+                                      decorationColor: Colors.red,
+                                    )
+                                  : TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                    ),
                             ),
                           ],
                         ),
@@ -220,7 +249,10 @@ class _FirstPageState extends State<FirstPage> {
                           children: [
                             Text("إجمالي الطلب بعد الخصم",
                                 style: TextStyle(fontWeight: FontWeight.bold)),
-                            Text("106 ج.م",
+                            Text(
+                                buttonPressed
+                                    ? '${priceAfterDisc.toString()} ج.م'
+                                    :'${monthess[_selectedMonth].price.toString()} ج.م',
                                 style: TextStyle(fontWeight: FontWeight.bold)),
                           ],
                         ),

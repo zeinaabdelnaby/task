@@ -2,45 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:task/models/monthes_model.dart';
 import 'package:task/widgets/vertical_scroll.dart';
 
-// class ScrollRow extends StatefulWidget {
-//    ScrollRow({super.key,required this.monthes});
-
-//   MonthesModel monthes;
-//   @override
-//   State<ScrollRow> createState() => _ScrollRowState();
-// }
-
-// int selectedOption = 0;
-
-// class _ScrollRowState extends State<ScrollRow> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Column(children: [
-//       Row(
-//         children: [
-//           Radio(
-//               value: 1,
-//               groupValue: selectedOption,
-//               onChanged: (value) {
-//                 setState(() {
-//                   selectedOption = value!;
-//                 });
-//               }),
-//           Text(
-//             ,
-//             style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
-//           )
-//         ],
-//       ),
-//       VerticalScrollItems()
-//     ]);
-//   }
-// }
 
 class ScrollRow extends StatelessWidget {
-  ScrollRow({super.key, required this.monthes});
+  ScrollRow({super.key, required this.monthes,  required this.index, required this.selectedIndex, required this.onSelectedChanged, required this.colory});
 
-  MonthesModel monthes;
+  final MonthesModel monthes;
+  final int index;
+  final int selectedIndex;
+  final Color colory;
+  final void Function(int? value) onSelectedChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -50,21 +20,17 @@ class ScrollRow extends StatelessWidget {
       Row(
         children: [
           Radio(
-              value: 1,
-              groupValue: selectedOption,
-              onChanged: (value) {
-                // setState(() {
-                //   selectedOption = value!;
-                // }
-                // );
-              }),
+              value: index,
+              groupValue: selectedIndex,
+              onChanged: onSelectedChanged,
+              ),
           Text(
             monthes.name,
             style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
           )
         ],
       ),
-      VerticalScrollItems(monthes: monthes)
+      VerticalScrollItems(monthes: monthes, colory: colory,)
     ]);
   }
 }
