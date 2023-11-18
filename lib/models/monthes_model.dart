@@ -1,4 +1,3 @@
-import 'dart:convert';
 
 class MonthesModel {
   final int id;
@@ -22,7 +21,6 @@ class MonthesModel {
       freeStatus: jsonData['free_status'],
       content: ContentModel.fromJsonList((jsonData['content'] as List)
           .cast<Map<String, dynamic>>(),)
-      // content: []
     );
   }
 }

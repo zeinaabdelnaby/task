@@ -1,49 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:task/constants/colors.dart';
 import 'package:task/models/monthes_model.dart';
 import 'package:task/services/get_info.dart';
 import 'package:task/widgets/scroll_row.dart';
-import 'package:task/widgets/vertical_scroll.dart';
 
 class FirstPage extends StatefulWidget {
-  FirstPage({super.key});
+  const FirstPage({super.key});
 
   @override
   State<FirstPage> createState() => _FirstPageState();
 }
 
-int _selectedIndex = 0;
-const List<Widget> _widgetOptions = <Widget>[
-  Text('Home Page',
-      style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold)),
-  Text('Search Page',
-      style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold)),
-  Text('Profile Page',
-      style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold)),
-];
+
 
 class _FirstPageState extends State<FirstPage> {
+int _selectedIndex = 0;
   int _selectedMonth = 0;
   int priceAfterDisc = 0;
   bool buttonPressed = false;
   final List<Color> colors = [Colors.green, Colors.blue, Colors.purple];
 
-
-  static const TextStyle optionStyle =
-      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-  static const List<Widget> _widgetOptions = <Widget>[
-    Text(
-      'Index 0: Home',
-      style: optionStyle,
-    ),
-    Text(
-      'Index 1: Business',
-      style: optionStyle,
-    ),
-    Text(
-      'Index 2: School',
-      style: optionStyle,
-    ),
-  ];
 
   void _onItemTapped(int index) {
     setState(() {
@@ -55,8 +31,8 @@ class _FirstPageState extends State<FirstPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 96, 68, 255),
-        shape: RoundedRectangleBorder(
+        backgroundColor: kPrimaryColor,
+        shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
             bottomRight: Radius.circular(30),
           ),
@@ -75,7 +51,7 @@ class _FirstPageState extends State<FirstPage> {
             onPressed: () {},
           )
         ],
-        title: Column(
+        title: const Column(
           children: [
             Text(
               "اسم الطالب",
@@ -93,8 +69,8 @@ class _FirstPageState extends State<FirstPage> {
         ),
         leading: Builder(
           builder: (BuildContext context) {
-            return Padding(
-              padding: const EdgeInsets.only(right: 10.0),
+            return const Padding(
+              padding: EdgeInsets.only(right: 10.0),
               child: CircleAvatar(
                 backgroundImage: NetworkImage(
                     'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRR0NGNX89GD-iF2DlkwVislMgxyLFv39Bow5HbkrUbkQ&s'),
@@ -139,7 +115,7 @@ class _FirstPageState extends State<FirstPage> {
                                 Container(
                                   height: 23,
                                   width: 23,
-                                  decoration: BoxDecoration(
+                                  decoration: const BoxDecoration(
                                       color: Colors.orange,
                                       shape: BoxShape.circle),
                                 ),
@@ -151,7 +127,7 @@ class _FirstPageState extends State<FirstPage> {
                                     color: Colors.blue,
                                   ),
                                 ),
-                                Text(
+                                const Text(
                                   "اختر الشهر",
                                   style: TextStyle(fontWeight: FontWeight.bold),
                                 ),
@@ -160,10 +136,10 @@ class _FirstPageState extends State<FirstPage> {
                             Container(
                               height: 40,
                               width: 40,
-                              decoration: BoxDecoration(
-                                  color: Color.fromARGB(255, 96, 68, 255),
+                              decoration: const BoxDecoration(
+                                  color: kPrimaryColor,
                                   shape: BoxShape.circle),
-                              child: Center(
+                              child: const Center(
                                   child: Text(
                                 "25",
                                 style: TextStyle(
@@ -189,11 +165,11 @@ class _FirstPageState extends State<FirstPage> {
                           borderRadius: BorderRadius.circular(8),
                           elevation: 7,
                           shadowColor: Colors.grey,
-                          child: Container(
+                          child: SizedBox(
                             width: 450,
                             child: Row(
                               children: [
-                                Flexible(
+                                const Flexible(
                                   child: Padding(
                                     padding: EdgeInsets.only(right: 10),
                                     child: TextField(
@@ -212,7 +188,7 @@ class _FirstPageState extends State<FirstPage> {
                                     onPressed: () {
                                       onButtonPressed();
                                     },
-                                    child: Text(
+                                    child: const Text(
                                       "استخدام",
                                       style: TextStyle(
                                           color: Colors.green,
@@ -222,23 +198,23 @@ class _FirstPageState extends State<FirstPage> {
                             ),
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 20,
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text("إجمالي الطلب",
+                            const Text("إجمالي الطلب",
                                 style: TextStyle(fontWeight: FontWeight.bold)),
                             Text(
                               '${monthess[_selectedMonth].price.toString()} ج.م',
                               style: buttonPressed
-                                  ? TextStyle(
+                                  ? const TextStyle(
                                       fontWeight: FontWeight.bold,
                                       decoration: TextDecoration.lineThrough,
                                       decorationColor: Colors.red,
                                     )
-                                  : TextStyle(
+                                  : const TextStyle(
                                       fontWeight: FontWeight.bold,
                                     ),
                             ),
@@ -247,30 +223,30 @@ class _FirstPageState extends State<FirstPage> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text("إجمالي الطلب بعد الخصم",
+                            const Text("إجمالي الطلب بعد الخصم",
                                 style: TextStyle(fontWeight: FontWeight.bold)),
                             Text(
                                 buttonPressed
                                     ? '${priceAfterDisc.toString()} ج.م'
                                     :'${monthess[_selectedMonth].price.toString()} ج.م',
-                                style: TextStyle(fontWeight: FontWeight.bold)),
+                                style: const TextStyle(fontWeight: FontWeight.bold)),
                           ],
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 20,
                         ),
                         Container(
                           width: 220.0,
                           height: 50.0,
-                          decoration: new BoxDecoration(
-                            color: const Color.fromARGB(255, 96, 68, 255),
+                          decoration: BoxDecoration(
+                            color: kPrimaryColor,
                             border:
-                                new Border.all(color: Colors.white, width: 2.0),
-                            borderRadius: new BorderRadius.circular(25.0),
+                                Border.all(color: Colors.white, width: 2.0),
+                            borderRadius: BorderRadius.circular(25.0),
                           ),
                           child: TextButton(
                             onPressed: () {},
-                            child: Text(
+                            child: const Text(
                               'أكمل الطلب',
                               style: TextStyle(
                                   fontSize: 18.0, color: Colors.white),
@@ -281,8 +257,8 @@ class _FirstPageState extends State<FirstPage> {
                     );
                   } else if (snapshot.hasError) {
                     print(snapshot.error);
-                    return Center(
-                      child: Container(child: Text("there is an error")),
+                    return const Center(
+                      child: Text("there is an error"),
                     );
                   } else {
                     return const Center(
@@ -292,28 +268,28 @@ class _FirstPageState extends State<FirstPage> {
                 })),
       ),
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Color.fromARGB(255, 230, 230, 230),
+        backgroundColor: const Color.fromARGB(255, 230, 230, 230),
         type: BottomNavigationBarType.fixed,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(
               Icons.list,
               size: 27,
-              color: const Color.fromARGB(255, 96, 68, 255),
+              color: kPrimaryColor,
             ),
             label: '',
           ),
           BottomNavigationBarItem(
             icon: Icon(
               Icons.book_outlined,
-              color: const Color.fromARGB(255, 96, 68, 255),
+              color: kPrimaryColor,
             ),
             label: '',
           ),
           BottomNavigationBarItem(
             icon: Icon(
               Icons.home_outlined,
-              color: const Color.fromARGB(255, 96, 68, 255),
+              color: kPrimaryColor,
               size: 29,
             ),
             label: '',
@@ -321,20 +297,19 @@ class _FirstPageState extends State<FirstPage> {
           BottomNavigationBarItem(
             icon: Icon(
               Icons.note_alt_outlined,
-              color: const Color.fromARGB(255, 96, 68, 255),
+              color: kPrimaryColor,
             ),
             label: '',
           ),
           BottomNavigationBarItem(
             icon: Icon(
               Icons.play_circle_outline_outlined,
-              color: const Color.fromARGB(255, 96, 68, 255),
+              color: kPrimaryColor,
             ),
             label: '',
           ),
         ],
         currentIndex: _selectedIndex,
-        // selectedItemColor: Colors.grey,
         onTap: _onItemTapped,
       ),
     );

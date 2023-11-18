@@ -14,7 +14,7 @@ class ScrollRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    int selectedOption = 0;
+    // int selectedOption = 0;
 
     return Column(children: [
       Row(
