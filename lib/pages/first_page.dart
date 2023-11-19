@@ -1,3 +1,4 @@
+import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:task/constants/colors.dart';
 import 'package:task/models/monthes_model.dart';
@@ -11,15 +12,12 @@ class FirstPage extends StatefulWidget {
   State<FirstPage> createState() => _FirstPageState();
 }
 
-
-
 class _FirstPageState extends State<FirstPage> {
-int _selectedIndex = 0;
+  int _selectedIndex = 0;
   int _selectedMonth = 0;
   int priceAfterDisc = 0;
   bool buttonPressed = false;
   final List<Color> colors = [Colors.green, Colors.blue, Colors.purple];
-
 
   void _onItemTapped(int index) {
     setState(() {
@@ -28,6 +26,7 @@ int _selectedIndex = 0;
   }
 
   @override
+  int _bottomNavIndex = 0;
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -137,8 +136,7 @@ int _selectedIndex = 0;
                               height: 40,
                               width: 40,
                               decoration: const BoxDecoration(
-                                  color: kPrimaryColor,
-                                  shape: BoxShape.circle),
+                                  color: kPrimaryColor, shape: BoxShape.circle),
                               child: const Center(
                                   child: Text(
                                 "25",
@@ -151,6 +149,8 @@ int _selectedIndex = 0;
                         SizedBox(
                           height: 400,
                           child: ListView.builder(
+                              shrinkWrap: true,
+                              physics: const BouncingScrollPhysics(),
                               itemCount: 3,
                               itemBuilder: (BuildContext context, int index) =>
                                   ScrollRow(
@@ -228,8 +228,9 @@ int _selectedIndex = 0;
                             Text(
                                 buttonPressed
                                     ? '${priceAfterDisc.toString()} ج.م'
-                                    :'${monthess[_selectedMonth].price.toString()} ج.م',
-                                style: const TextStyle(fontWeight: FontWeight.bold)),
+                                    : '${monthess[_selectedMonth].price.toString()} ج.م',
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.bold)),
                           ],
                         ),
                         const SizedBox(
@@ -240,8 +241,7 @@ int _selectedIndex = 0;
                           height: 50.0,
                           decoration: BoxDecoration(
                             color: kPrimaryColor,
-                            border:
-                                Border.all(color: Colors.white, width: 2.0),
+                            border: Border.all(color: Colors.white, width: 2.0),
                             borderRadius: BorderRadius.circular(25.0),
                           ),
                           child: TextButton(
@@ -312,6 +312,19 @@ int _selectedIndex = 0;
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
       ),
+      // floatingActionButton: FloatingActionButton(
+      //     child: Icon(Icons.home_max_outlined), onPressed: () {}),
+      // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      // bottomNavigationBar: AnimatedBottomNavigationBar(
+      //   // navigation bar
+      //   icons: iconList,
+      //   activeIndex: _bottomNavIndex,
+      //   gapLocation: GapLocation.center,
+      //   notchMargin: 8, // Default notch margin is 8
+      //   notchSmoothness: NotchSmoothness.verySmoothEdge,
+      //   onTap: (index) => setState(() => _bottomNavIndex = index),
+      //   backgroundColor: Colors.blue,
+      // ),
     );
   }
 }

@@ -12,11 +12,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Directionality( 
-        textDirection: TextDirection.rtl, 
+      home: Directionality(
+        textDirection: TextDirection.rtl,
         child: FirstPage(),
       ),
     );
   }
 }
-
