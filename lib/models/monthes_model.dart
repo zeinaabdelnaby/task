@@ -1,27 +1,28 @@
-
 class MonthesModel {
   final int id;
   final String name;
   final int price;
+  bool isSelceted;
   final String freeStatus;
   final List<ContentModel> content;
 
   MonthesModel(
       {required this.id,
       required this.name,
+      this.isSelceted = false,
       required this.price,
       required this.freeStatus,
       required this.content});
 
   factory MonthesModel.fromJson(jsonData) {
     return MonthesModel(
-      id: jsonData['id'],
-      name: jsonData['name'],
-      price: jsonData['price'],
-      freeStatus: jsonData['free_status'],
-      content: ContentModel.fromJsonList((jsonData['content'] as List)
-          .cast<Map<String, dynamic>>(),)
-    );
+        id: jsonData['id'],
+        name: jsonData['name'],
+        price: jsonData['price'],
+        freeStatus: jsonData['free_status'],
+        content: ContentModel.fromJsonList(
+          (jsonData['content'] as List).cast<Map<String, dynamic>>(),
+        ));
   }
 }
 

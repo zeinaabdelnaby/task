@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:task/constants/colors.dart';
+import 'package:task/core/constants/colors.dart';
 import 'package:task/models/monthes_model.dart';
 
 class VerticalScrollItems extends StatelessWidget {
-  VerticalScrollItems(
-      {super.key, required this.monthes, this.colory = KSecondaryColor});
+  const VerticalScrollItems(
+      {super.key, required this.monthes, this.colory = kDividerColor});
 
   final MonthesModel monthes;
   final Color colory;
@@ -13,10 +13,10 @@ class VerticalScrollItems extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       height: 90,
-      width: 100,
+      // width: 100,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
-        physics: BouncingScrollPhysics(),
+        physics: const BouncingScrollPhysics(),
         shrinkWrap: true,
         itemCount: monthes.content.length,
         itemBuilder: (BuildContext context, int index) => Padding(
@@ -29,7 +29,7 @@ class VerticalScrollItems extends StatelessWidget {
               child: Card(
                 elevation: 0,
                 color: colory,
-                child: Container(
+                child: SizedBox(
                   height: 40,
                   width: 150,
                   child: Padding(
@@ -41,14 +41,14 @@ class VerticalScrollItems extends StatelessWidget {
                         Text(
                           monthes.content[index].name,
                           maxLines: 1,
-                          style: TextStyle(
+                          style: const TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.w500,
                               fontSize: 13),
                         ),
                         Text(
                           monthes.content[index].time,
-                          style: TextStyle(
+                          style: const TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.w500,
                               fontSize: 13),

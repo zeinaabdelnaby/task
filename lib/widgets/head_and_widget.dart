@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:task/constants/colors.dart';
+import 'package:task/core/constants/colors.dart';
 import 'package:task/models/monthes_model.dart';
 import 'package:task/widgets/vertical_scroll.dart';
 
@@ -15,13 +15,13 @@ class HeadAndWidget extends StatelessWidget {
       children: [
         Text(
           title,
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
         ),
-        Container(
+        const SizedBox(
           width: 70,
           child: Divider(
             thickness: 1,
-            color: KSecondaryColor,
+            color: kDividerColor,
           ),
         ),
         VerticalScrollItems(monthes: monthes)
