@@ -15,7 +15,7 @@ class HeadAndWidget extends StatelessWidget {
       children: [
         Text(
           title,
-          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
         ),
         const SizedBox(
           width: 70,

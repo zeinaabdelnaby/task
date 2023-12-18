@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:task/controller/data/datasource/static/static.dart';
 import 'package:task/core/constants/colors.dart';
-import 'package:task/features/home/second_page.dart';
+import 'package:task/features/home/screen/second_page.dart';
+import 'package:task/features/login/login.dart';
 
 import '../../../core/constants/sharedprefrence.dart';
 
@@ -39,7 +41,7 @@ class _OnBoardingState extends State<OnBoarding> {
               width: 300,
             ),
             const SizedBox(
-              height: 50,
+              height: 30,
             ),
             Text(
               onBoardingList[i].title!,
@@ -73,14 +75,11 @@ class _OnBoardingState extends State<OnBoarding> {
             pageNumber > 0
                 ? InkWell(
                     onTap: () {
-                      Prefrence.setValue().then((value) {
-                        Prefrence.getValue();
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const SecondPage()),
-                        );
-                      });
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => LoginScreen()),
+                      );
                     },
                     child: Container(
                       width: 110,
@@ -101,11 +100,6 @@ class _OnBoardingState extends State<OnBoarding> {
                       ),
                     ),
                   )
-                // const CustomButtonOnBoarding(
-                //     text: 'تخطي',
-                //     color: customGreyColor,
-                //     bgcolor: Colors.white,
-                //   )
                 : Container(),
             Center(
               child: Row(
@@ -128,15 +122,13 @@ class _OnBoardingState extends State<OnBoarding> {
                     ? nextPage.animateToPage(pageNumber + 1,
                         duration: const Duration(milliseconds: 700),
                         curve: Curves.easeIn)
-                    :
-                     Prefrence.setValue().then((value) {
-                        Prefrence.getValue();
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const SecondPage()),
-                        );
-                      });
+                    : null;
+               
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) =>  LoginScreen()),
+                  );
+               
               },
               child: Container(
                 width: 110,
@@ -157,11 +149,6 @@ class _OnBoardingState extends State<OnBoarding> {
                 ),
               ),
             )
-            // const CustomButtonOnBoarding(
-            //   text: "أنهى",
-            //   color: Colors.white,
-            //   bgcolor: kprimaryColor,
-            // ),
           ],
         ),
       ),
