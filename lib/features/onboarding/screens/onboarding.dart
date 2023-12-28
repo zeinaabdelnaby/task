@@ -122,13 +122,11 @@ class _OnBoardingState extends State<OnBoarding> {
                     ? nextPage.animateToPage(pageNumber + 1,
                         duration: const Duration(milliseconds: 700),
                         curve: Curves.easeIn)
-                    : null;
-               
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) =>  LoginScreen()),
-                  );
-               
+                    : 
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => LoginScreen()),
+                );
               },
               child: Container(
                 width: 110,

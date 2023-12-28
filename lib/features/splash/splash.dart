@@ -31,7 +31,7 @@ class _SplashAnimatedState extends State<SplashAnimated> {
     Timer(
         Duration(seconds: 3),
         () => Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => SecondPage())));
+            context, MaterialPageRoute(builder: (context) => Shared.pref.getString("email") != null ? SecondPage() : OnBoarding(),)));
   }
 
   @override

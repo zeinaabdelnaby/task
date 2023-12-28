@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:task/core/constants/colors.dart';
+import 'package:task/models/home_page_model.dart';
 import 'package:task/models/monthes_model.dart';
 
 class VerticalScrollItems extends StatelessWidget {
   const VerticalScrollItems(
-      {super.key, required this.monthes, this.colory = kDividerColor});
+      {super.key, required this.homePageInfo, this.colory = kDividerColor});
 
-  final MonthesModel monthes;
+  final HomePageModel homePageInfo;
   final Color colory;
 
   @override
@@ -18,7 +19,7 @@ class VerticalScrollItems extends StatelessWidget {
         scrollDirection: Axis.horizontal,
         physics: const BouncingScrollPhysics(),
         shrinkWrap: true,
-        itemCount: monthes.content.length,
+        itemCount: homePageInfo.videosBasics?.length,
         itemBuilder: (BuildContext context, int index) => Padding(
           padding: const EdgeInsets.all(4.0),
           child: Container(
@@ -39,7 +40,7 @@ class VerticalScrollItems extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          monthes.content[index].name,
+                          homePageInfo.videosBasics![index].name.toString(),
                           maxLines: 1,
                           style: const TextStyle(
                               color: Colors.white,
@@ -47,7 +48,7 @@ class VerticalScrollItems extends StatelessWidget {
                               fontSize: 13),
                         ),
                         Text(
-                          monthes.content[index].time,
+                          homePageInfo.videosBasics![index].time.toString(),
                           style: const TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.w500,

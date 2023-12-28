@@ -32,7 +32,8 @@ class MyApp extends StatelessWidget {
       //       )
           // OnBoarding(),
           // SplashAnimated(),
-          FirstPage(),
+          // FirstPage(),
+          SecondPage(),
     );
   }
 }

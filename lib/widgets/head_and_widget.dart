@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:task/core/constants/colors.dart';
+import 'package:task/models/home_page_model.dart';
 import 'package:task/models/monthes_model.dart';
 import 'package:task/widgets/vertical_scroll.dart';
 
 class HeadAndWidget extends StatelessWidget {
-  const HeadAndWidget({super.key, required this.title, required this.monthes});
+  const HeadAndWidget({super.key, required this.title, required this.homePageInfo});
   final String title;
-  final MonthesModel monthes;
+  final HomePageModel homePageInfo;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +25,7 @@ class HeadAndWidget extends StatelessWidget {
             color: kDividerColor,
           ),
         ),
-        VerticalScrollItems(monthes: monthes)
+        VerticalScrollItems(homePageInfo: homePageInfo)
       ],
     );
   }

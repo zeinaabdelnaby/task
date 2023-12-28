@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:task/models/home_page_model.dart';
 import 'package:task/models/monthes_model.dart';
 import 'package:task/widgets/vertical_scroll.dart';
 
 class ScrollRow extends StatelessWidget {
   ScrollRow(
       {super.key,
-      required this.monthes,
+      required this.homePageInfo,
       required this.index,
       required this.selectedIndex,
       required this.onSelectedChanged,
       required this.colory});
 
-  final MonthesModel monthes;
+  final HomePageModel homePageInfo;
   final int index;
   final int selectedIndex;
   final Color colory;
@@ -30,13 +31,14 @@ class ScrollRow extends StatelessWidget {
             onChanged: onSelectedChanged,
           ),
           Text(
-            monthes.name,
+            // homePageInfo.name,
+            ("zzzzzzzz"),
             style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
           )
         ],
       ),
       VerticalScrollItems(
-        monthes: monthes,
+        homePageInfo: homePageInfo,
         colory: colory,
       )
     ]);

@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:dots_indicator/dots_indicator.dart';
@@ -8,7 +7,9 @@ import 'package:task/core/constants/colors.dart';
 import 'package:task/core/constants/image_asset.dart';
 import 'package:task/features/first_page.dart';
 import 'package:task/features/home/widgets/custom_image.dart';
+import 'package:task/models/home_page_model.dart';
 import 'package:task/models/monthes_model.dart';
+import 'package:task/services/get_home_page_info.dart';
 import 'package:task/services/get_info.dart';
 import 'package:task/widgets/head_and_widget.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -112,12 +113,12 @@ class _SecondPageState extends State<SecondPage> {
       body: Directionality(
         textDirection: TextDirection.rtl,
         child: SingleChildScrollView(
-          child: FutureBuilder<List<MonthesModel>>(
-              future: AllMonthesService().getAllMonthes(),
+          child: FutureBuilder<List<HomePageModel>>(
+              future: AllHomePageService().getAllHomePage(),
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
                   print(snapshot.error);
-                  List<MonthesModel> monthes = snapshot.data!;
+                  List<HomePageModel> homePageInfo = snapshot.data!;
                   return Padding(
                     padding: const EdgeInsets.all(10.0),
                     child: SingleChildScrollView(
@@ -198,7 +199,7 @@ class _SecondPageState extends State<SecondPage> {
                           ),
                           HeadAndWidget(
                             title: 'فيديوهات تمهيدية',
-                            monthes: monthes[7],
+                            homePageInfo: homePageInfo[7],
                           ),
                           const SizedBox(
                             height: 18,
@@ -247,7 +248,7 @@ class _SecondPageState extends State<SecondPage> {
                           ),
                           HeadAndWidget(
                             title: 'المراجعة النهائية',
-                            monthes: monthes[8],
+                            homePageInfo: homePageInfo[8],
                           ),
                         ],
                       ),
