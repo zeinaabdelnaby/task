@@ -31,9 +31,9 @@ class _SecondPageState extends State<SecondPage> {
   ];
 
   final _pageController = PageController(initialPage: 0);
+  //  final HomePageModel homePageModel;
 
   int _page = 0;
-
 
   int maxCount = 5;
 
@@ -113,12 +113,12 @@ class _SecondPageState extends State<SecondPage> {
       body: Directionality(
         textDirection: TextDirection.rtl,
         child: SingleChildScrollView(
-          child: FutureBuilder<List<HomePageModel>>(
+          child: FutureBuilder<HomePageModel>(
               future: AllHomePageService().getAllHomePage(),
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
                   print(snapshot.error);
-                  List<HomePageModel> homePageInfo = snapshot.data!;
+                  HomePageModel homePageInfo = snapshot.data!;
                   return Padding(
                     padding: const EdgeInsets.all(10.0),
                     child: SingleChildScrollView(
@@ -151,7 +151,9 @@ class _SecondPageState extends State<SecondPage> {
                               ),
                             ),
                           ),
-                          SizedBox(height: 15,),
+                          SizedBox(
+                            height: 15,
+                          ),
                           Center(
                             child: Card(
                               elevation: 0,
@@ -199,7 +201,7 @@ class _SecondPageState extends State<SecondPage> {
                           ),
                           HeadAndWidget(
                             title: 'فيديوهات تمهيدية',
-                            homePageInfo: homePageInfo[7],
+                            homePageModel: HomePageModel(),
                           ),
                           const SizedBox(
                             height: 18,
@@ -232,23 +234,28 @@ class _SecondPageState extends State<SecondPage> {
                                 spacing: 2, // المسافة الأفقية بين العناصر
                                 runSpacing: 1, // المسافة الرأسية بين الصفوف
                                 children: <Widget>[
-                                  buildImageWidget(AppImageAsset.homeImageOne,
-                                     ),
-                                  buildImageWidget(AppImageAsset.homeImageTwo,
-                                      ),
-                                  buildImageWidget(AppImageAsset.homeImageThree,
-                                     ),
-                                  buildImageWidget(AppImageAsset.homeImageFour,
-                                      ),
-                                  buildImageWidget(AppImageAsset.homeImageFive,
-                                       ),
+                                  buildImageWidget(
+                                    AppImageAsset.homeImageOne,
+                                  ),
+                                  buildImageWidget(
+                                    AppImageAsset.homeImageTwo,
+                                  ),
+                                  buildImageWidget(
+                                    AppImageAsset.homeImageThree,
+                                  ),
+                                  buildImageWidget(
+                                    AppImageAsset.homeImageFour,
+                                  ),
+                                  buildImageWidget(
+                                    AppImageAsset.homeImageFive,
+                                  ),
                                 ],
                               ),
                             ],
                           ),
                           HeadAndWidget(
                             title: 'المراجعة النهائية',
-                            homePageInfo: homePageInfo[8],
+                            homePageModel: HomePageModel(),
                           ),
                         ],
                       ),
@@ -257,7 +264,7 @@ class _SecondPageState extends State<SecondPage> {
                 } else if (snapshot.hasError) {
                   print(snapshot.error);
                   return const Center(
-                    child: Text("there is an error"),
+                    child: Text("api error : there is an error"),
                   );
                 } else {
                   return const Center(
@@ -273,11 +280,6 @@ class _SecondPageState extends State<SecondPage> {
       //   children: List.generate(
       //       bottomBarPages.length, (index) => bottomBarPages[index]),
       // )
-     
-      
-      );
-    
+    );
   }
 }
-
-

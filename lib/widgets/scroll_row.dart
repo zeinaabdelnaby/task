@@ -6,13 +6,13 @@ import 'package:task/widgets/vertical_scroll.dart';
 class ScrollRow extends StatelessWidget {
   ScrollRow(
       {super.key,
-      required this.homePageInfo,
+      required this.homePageModel,
       required this.index,
       required this.selectedIndex,
       required this.onSelectedChanged,
       required this.colory});
 
-  final HomePageModel homePageInfo;
+  final HomePageModel homePageModel;
   final int index;
   final int selectedIndex;
   final Color colory;
@@ -38,7 +38,7 @@ class ScrollRow extends StatelessWidget {
         ],
       ),
       VerticalScrollItems(
-        homePageInfo: homePageInfo,
+        homePageModel: homePageModel,
         colory: colory,
       )
     ]);

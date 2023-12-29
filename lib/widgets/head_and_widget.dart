@@ -5,9 +5,9 @@ import 'package:task/models/monthes_model.dart';
 import 'package:task/widgets/vertical_scroll.dart';
 
 class HeadAndWidget extends StatelessWidget {
-  const HeadAndWidget({super.key, required this.title, required this.homePageInfo});
+  const HeadAndWidget({super.key, required this.title, required this.homePageModel});
   final String title;
-  final HomePageModel homePageInfo;
+  final HomePageModel homePageModel;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +25,7 @@ class HeadAndWidget extends StatelessWidget {
             color: kDividerColor,
           ),
         ),
-        VerticalScrollItems(homePageInfo: homePageInfo)
+        VerticalScrollItems(homePageModel: homePageModel)
       ],
     );
   }
