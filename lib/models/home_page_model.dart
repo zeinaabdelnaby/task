@@ -635,7 +635,7 @@ class Classes {
   int? totalTimes;
   String? createdAt;
   String? updatedAt;
-  List<Exams>? exams;
+  // List<Exams>? exams;
 
   Classes(
       {this.id,
@@ -650,7 +650,8 @@ class Classes {
       this.totalTimes,
       this.createdAt,
       this.updatedAt,
-      this.exams});
+      // this.exams
+      });
 
   Classes.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -665,12 +666,12 @@ class Classes {
     totalTimes = json['total_times'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
-    if (json['exams'] != null) {
-      exams = <Exams>[];
-      json['exams'].forEach((v) {
-        exams!.add(new Exams.fromJson(v));
-      });
-    }
+    // if (json['exams'] != null) {
+    //   exams = <Exams>[];
+    //   json['exams'].forEach((v) {
+    //     exams!.add(new Exams.fromJson(v));
+    //   });
+    // }
   }
 
   Map<String, dynamic> toJson() {
@@ -687,82 +688,82 @@ class Classes {
     data['total_times'] = this.totalTimes;
     data['created_at'] = this.createdAt;
     data['updated_at'] = this.updatedAt;
-    if (this.exams != null) {
-      data['exams'] = this.exams!.map((v) => v.toJson()).toList();
-    }
+    // if (this.exams != null) {
+    //   data['exams'] = this.exams!.map((v) => v.toJson()).toList();
+    // }
     return data;
   }
 }
 
-class Exams {
-  int? id;
-  String? name;
-  String? type;
-  String? examType;
-  String? backgroundColor;
-  String? examsFavorite;
-  String? pdfExamUpload;
-  String? answerPdfFile;
-  Null? answerVideoFile;
-  int? answerVideoIsYoutube;
-  int? numOfQuestion;
-  int? totalTime;
-  int? examPdfSize;
-  int? answerPdfSize;
-  int? answerVideoSize;
+// class Exams {
+//   int? id;
+//   String? name;
+//   String? type;
+//   String? examType;
+//   String? backgroundColor;
+//   String? examsFavorite;
+//   String? pdfExamUpload;
+//   String? answerPdfFile;
+//   // Null? answerVideoFile;
+//   int? answerVideoIsYoutube;
+//   int? numOfQuestion;
+//   int? totalTime;
+//   int? examPdfSize;
+//   int? answerPdfSize;
+//   int? answerVideoSize;
 
-  Exams(
-      {this.id,
-      this.name,
-      this.type,
-      this.examType,
-      this.backgroundColor,
-      this.examsFavorite,
-      this.pdfExamUpload,
-      this.answerPdfFile,
-      this.answerVideoFile,
-      this.answerVideoIsYoutube,
-      this.numOfQuestion,
-      this.totalTime,
-      this.examPdfSize,
-      this.answerPdfSize,
-      this.answerVideoSize});
+//   Exams(
+//       {this.id,
+//       this.name,
+//       this.type,
+//       this.examType,
+//       this.backgroundColor,
+//       this.examsFavorite,
+//       this.pdfExamUpload,
+//       this.answerPdfFile,
+//       // this.answerVideoFile,
+//       this.answerVideoIsYoutube,
+//       this.numOfQuestion,
+//       this.totalTime,
+//       this.examPdfSize,
+//       this.answerPdfSize,
+//       this.answerVideoSize});
 
-  Exams.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    name = json['name'];
-    type = json['type'];
-    examType = json['exam_type'];
-    backgroundColor = json['background_color'];
-    examsFavorite = json['exams_favorite'];
-    pdfExamUpload = json['pdf_exam_upload'];
-    answerPdfFile = json['answer_pdf_file'];
-    // answerVideoFile = json['answer_video_file'];
-    answerVideoIsYoutube = json['answer_video_is_youtube'];
-    numOfQuestion = json['num_of_question'];
-    totalTime = json['total_time'];
-    examPdfSize = json['exam_pdf_size'];
-    answerPdfSize = json['answer_pdf_size'];
-    answerVideoSize = json['answer_video_size'];
-  }
+//   Exams.fromJson(Map<String, dynamic> json) {
+//     id = json['id'];
+//     name = json['name'];
+//     type = json['type'];
+//     examType = json['exam_type'];
+//     backgroundColor = json['background_color'];
+//     examsFavorite = json['exams_favorite'];
+//     pdfExamUpload = json['pdf_exam_upload'];
+//     answerPdfFile = json['answer_pdf_file'];
+//     // answerVideoFile = json['answer_video_file'];
+//     answerVideoIsYoutube = json['answer_video_is_youtube'];
+//     numOfQuestion = json['num_of_question'];
+//     totalTime = json['total_time'];
+//     examPdfSize = json['exam_pdf_size'];
+//     answerPdfSize = json['answer_pdf_size'];
+//     answerVideoSize = json['answer_video_size'];
+//   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['name'] = this.name;
-    data['type'] = this.type;
-    data['exam_type'] = this.examType;
-    data['background_color'] = this.backgroundColor;
-    data['exams_favorite'] = this.examsFavorite;
-    data['pdf_exam_upload'] = this.pdfExamUpload;
-    data['answer_pdf_file'] = this.answerPdfFile;
-    // data['answer_video_file'] = this.answerVideoFile;
-    data['answer_video_is_youtube'] = this.answerVideoIsYoutube;
-    data['num_of_question'] = this.numOfQuestion;
-    data['total_time'] = this.totalTime;
-    data['exam_pdf_size'] = this.examPdfSize;
-    data['answer_pdf_size'] = this.answerPdfSize;
-    data['answer_video_size'] = this.answerVideoSize;
-    return data;
-  }
-}
+//   Map<String, dynamic> toJson() {
+//     final Map<String, dynamic> data = new Map<String, dynamic>();
+//     data['id'] = this.id;
+//     data['name'] = this.name;
+//     data['type'] = this.type;
+//     data['exam_type'] = this.examType;
+//     data['background_color'] = this.backgroundColor;
+//     data['exams_favorite'] = this.examsFavorite;
+//     data['pdf_exam_upload'] = this.pdfExamUpload;
+//     data['answer_pdf_file'] = this.answerPdfFile;
+//     // data['answer_video_file'] = this.answerVideoFile;
+//     data['answer_video_is_youtube'] = this.answerVideoIsYoutube;
+//     data['num_of_question'] = this.numOfQuestion;
+//     data['total_time'] = this.totalTime;
+//     data['exam_pdf_size'] = this.examPdfSize;
+//     data['answer_pdf_size'] = this.answerPdfSize;
+//     data['answer_video_size'] = this.answerVideoSize;
+//     return data;
+//   }
+// }
