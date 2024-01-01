@@ -40,6 +40,7 @@ dependencies:
   page_transition: ^2.1.0
   scroll_controller_direction: ^0.0.6
   shared_preferences: ^2.2.2
+  url_launcher: ^6.2.2
 
 dev_dependencies:
   flutter_lints: ^2.0.0

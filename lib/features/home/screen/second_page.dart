@@ -3,6 +3,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/widgets.dart';
+import 'package:task/controller/data/datasource/static/static.dart';
 import 'package:task/core/constants/colors.dart';
 import 'package:task/core/constants/image_asset.dart';
 import 'package:task/features/first_page.dart';
@@ -13,6 +14,7 @@ import 'package:task/services/get_home_page_info.dart';
 import 'package:task/services/get_info.dart';
 import 'package:task/widgets/head_and_widget.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class SecondPage extends StatefulWidget {
   const SecondPage({super.key});
@@ -24,18 +26,13 @@ class SecondPage extends StatefulWidget {
 class _SecondPageState extends State<SecondPage> {
   int currentIndex = 0;
 
-  final List<Image> items = [
-    Image.asset(AppImageAsset.homeBannerOne),
-    Image.asset(AppImageAsset.homeBannerTwo),
-    Image.asset(AppImageAsset.homeBannerThree),
-  ];
-
   final _pageController = PageController(initialPage: 0);
-  //  final HomePageModel homePageModel;
 
   int _page = 0;
 
   int maxCount = 5;
+
+  final Uri _url = Uri.parse('https://flutter.dev');
 
   @override
   void dispose() {
@@ -117,8 +114,17 @@ class _SecondPageState extends State<SecondPage> {
               future: AllHomePageService().getAllHomePage(),
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
-                  print(snapshot.error);
-                  HomePageModel homePageInfo = snapshot.data!;
+                  HomePageModel homePageModel = snapshot.data!;
+                  List imgList = [
+                    homePageModel.data!.sliders![0].file.toString(),
+                    homePageModel.data!.sliders![1].file.toString(),
+                    homePageModel.data!.sliders![2].file.toString(),
+                  ];
+                   List linkList = [
+                    homePageModel.data!.sliders![0].link.toString(),
+                    homePageModel.data!.sliders![1].link.toString(),
+                    homePageModel.data!.sliders![2].link.toString(),
+                  ];
                   return Padding(
                     padding: const EdgeInsets.all(10.0),
                     child: SingleChildScrollView(
@@ -126,20 +132,30 @@ class _SecondPageState extends State<SecondPage> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           CarouselSlider(
-                              options: CarouselOptions(
-                                autoPlay: true,
-                                aspectRatio: 2.0,
-                                enlargeCenterPage: true,
-                                onPageChanged: (index, reason) {
-                                  setState(() {
-                                    currentIndex = index;
-                                  });
-                                },
-                              ),
-                              items: items),
+                            options: CarouselOptions(
+                              autoPlay: true,
+                              aspectRatio: 2.0,
+                              enlargeCenterPage: true,
+                              onPageChanged: (index, reason) {
+                                setState(() {
+                                  currentIndex = index;
+                                });
+                              },
+                            ),
+                            items: imgList
+                                .map((item) => Container(
+                                      child: Center(
+                                          child: GestureDetector(
+                                            onTap: _launchURL,
+                                            child: Image.network(item,
+                                                fit: BoxFit.cover, width: 1000),
+                                          )),
+                                    ))
+                                .toList(),
+                          ),
                           Center(
                             child: DotsIndicator(
-                              dotsCount: items.length,
+                              dotsCount: imgList.length,
                               position: currentIndex,
                               decorator: DotsDecorator(
                                 activeColor: kDividerColor,
@@ -201,7 +217,7 @@ class _SecondPageState extends State<SecondPage> {
                           ),
                           HeadAndWidget(
                             title: 'فيديوهات تمهيدية',
-                            homePageModel: HomePageModel(),
+                            homePageModel: homePageModel,
                           ),
                           const SizedBox(
                             height: 18,
@@ -255,7 +271,7 @@ class _SecondPageState extends State<SecondPage> {
                           ),
                           HeadAndWidget(
                             title: 'المراجعة النهائية',
-                            homePageModel: HomePageModel(),
+                            homePageModel: homePageModel,
                           ),
                         ],
                       ),
@@ -266,10 +282,13 @@ class _SecondPageState extends State<SecondPage> {
                   return const Center(
                     child: Text("api error : there is an error"),
                   );
-                } else {
+                } else if (snapshot.connectionState ==
+                    ConnectionState.waiting) {
                   return const Center(
                     child: CircularProgressIndicator(),
                   );
+                } else {
+                  return Text('${snapshot.error}');
                 }
               }),
         ),
@@ -282,4 +301,11 @@ class _SecondPageState extends State<SecondPage> {
       // )
     );
   }
+_launchURL() async {
+   final Uri url = Uri.parse('https://flutter.dev');
+   if (!await launchUrl(url)) {
+        throw Exception('Could not launch $_url');
+    }
 }
+}
+

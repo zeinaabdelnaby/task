@@ -31,7 +31,7 @@ class VerticalScrollItems extends StatelessWidget {
               ),
               child: Card(
                 elevation: 0,
-                color: colory,
+                color: Colors.black ,
                 child: SizedBox(
                   height: 40,
                   width: 150,
@@ -42,8 +42,8 @@ class VerticalScrollItems extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          
-                          homePageModel.data!.videosBasics![index].name.toString(),
+                          homePageModel.data != null ? 
+                          homePageModel.data!.videosBasics![index].name.toString(): "no data",
                           maxLines: 1,
                           style: const TextStyle(
                               color: Colors.white,
@@ -51,7 +51,8 @@ class VerticalScrollItems extends StatelessWidget {
                               fontSize: 13),
                         ),
                         Text(
-                          homePageModel.data!.videosBasics![index].time.toString(),
+                          homePageModel.data != null ? 
+                          homePageModel.data!.videosBasics![index].time.toString(): "no data",
                           style: const TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.w500,

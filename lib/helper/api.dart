@@ -12,7 +12,7 @@ class Api {
     http.Response response = await http.get(Uri.parse(url), headers: headers);
 
     if (response.statusCode == 200) {
-      print(response.body);
+      // print(response.body);
       return jsonDecode(response.body);
     } else {
       throw Exception(
