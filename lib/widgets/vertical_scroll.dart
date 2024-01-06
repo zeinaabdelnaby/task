@@ -5,11 +5,10 @@ import 'package:task/models/monthes_model.dart';
 
 class VerticalScrollItems extends StatelessWidget {
   const VerticalScrollItems(
-      {super.key, this.colory = kDividerColor, required this.homePageModel});
+      {super.key, required this.homePageModel});
 
   final HomePageModel homePageModel;
 
-  final Color colory;
 
   @override
   Widget build(BuildContext context) {
@@ -27,11 +26,11 @@ class VerticalScrollItems extends StatelessWidget {
           child: Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(8),
-                color: colory,
+                color: HexColor.fromHex(homePageModel.data!.videosBasics![index].backgroundColor.toString()),
               ),
               child: Card(
                 elevation: 0,
-                color: Colors.black ,
+                color: HexColor.fromHex(homePageModel.data!.videosBasics![index].backgroundColor.toString()) ,
                 child: SizedBox(
                   height: 40,
                   width: 150,
@@ -67,4 +66,22 @@ class VerticalScrollItems extends StatelessWidget {
       ),
     );
   }
+}
+
+
+extension HexColor on Color {
+  /// String is in the format "aabbcc" or "ffaabbcc" with an optional leading "#".
+  static Color fromHex(String hexString) {
+    final buffer = StringBuffer();
+    if (hexString.length == 6 || hexString.length == 7) buffer.write('ff');
+    buffer.write(hexString.replaceFirst('#', ''));
+    return Color(int.parse(buffer.toString(), radix: 16));
+  }
+
+  /// Prefixes a hash sign if [leadingHashSign] is set to `true` (default is `true`).
+  String toHex({bool leadingHashSign = true}) => '${leadingHashSign ? '#' : ''}'
+      '${alpha.toRadixString(16).padLeft(2, '0')}'
+      '${red.toRadixString(16).padLeft(2, '0')}'
+      '${green.toRadixString(16).padLeft(2, '0')}'
+      '${blue.toRadixString(16).padLeft(2, '0')}';
 }

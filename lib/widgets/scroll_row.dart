@@ -10,12 +10,11 @@ class ScrollRow extends StatelessWidget {
       required this.index,
       required this.selectedIndex,
       required this.onSelectedChanged,
-      required this.colory});
+     });
 
   final HomePageModel homePageModel;
   final int index;
   final int selectedIndex;
-  final Color colory;
   final void Function(int? value) onSelectedChanged;
 
   @override
@@ -39,7 +38,6 @@ class ScrollRow extends StatelessWidget {
       ),
       VerticalScrollItems(
         homePageModel: homePageModel,
-        colory: colory,
       )
     ]);
   }

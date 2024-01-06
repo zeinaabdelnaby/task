@@ -15,7 +15,7 @@ class HomePageModel {
 }
 
 class Data {
-  // Null? lifeExam;
+  Null? lifeExam;
   // Null? liveModel;
   int? notificationCount;
   String? centerStatus;
@@ -27,7 +27,7 @@ class Data {
 
   Data(
       {
-      //   this.lifeExam,
+        this.lifeExam,
       // this.liveModel,
       this.notificationCount,
       this.centerStatus,
@@ -39,7 +39,7 @@ class Data {
       });
 
   Data.fromJson(Map<String, dynamic> json) {
-    // lifeExam = json['life_exam'];
+    lifeExam = json['life_exam'];
     // liveModel = json['live_model'];
     notificationCount = json['notification_count'];
     centerStatus = json['center_status'];
@@ -150,7 +150,7 @@ class Classes {
   int? totalTimes;
   String? createdAt;
   String? updatedAt;
-  // List<Exams>? exams;
+  List<Exams>? exams;
 
   Classes(
       {this.id,
@@ -165,7 +165,7 @@ class Classes {
       this.totalTimes,
       this.createdAt,
       this.updatedAt,
-      // this.exams
+      this.exams
       });
 
   Classes.fromJson(Map<String, dynamic> json) {
@@ -181,67 +181,67 @@ class Classes {
     totalTimes = json['total_times'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
-    // if (json['exams'] != null) {
-    //   exams = <Exams>[];
-    //   json['exams'].forEach((v) {
-    //     exams!.add( Exams.fromJson(v));
-    //   });
-    // }
+    if (json['exams'] != null) {
+      exams = <Exams>[];
+      json['exams'].forEach((v) {
+        exams!.add( Exams.fromJson(v));
+      });
+    }
   }
 
 }
 
-// class Exams {
-//   int? id;
-//   String? name;
-//   String? type;
-//   String? examType;
-//   String? backgroundColor;
-//   String? examsFavorite;
-//   String? pdfExamUpload;
-//   String? answerPdfFile;
-//   // Null? answerVideoFile;
-//   int? answerVideoIsYoutube;
-//   int? numOfQuestion;
-//   int? totalTime;
-//   int? examPdfSize;
-//   int? answerPdfSize;
-//   int? answerVideoSize;
+class Exams {
+  int? id;
+  String? name;
+  String? type;
+  String? examType;
+  String? backgroundColor;
+  String? examsFavorite;
+  String? pdfExamUpload;
+  String? answerPdfFile;
+  // Null? answerVideoFile;
+  int? answerVideoIsYoutube;
+  int? numOfQuestion;
+  int? totalTime;
+  int? examPdfSize;
+  int? answerPdfSize;
+  int? answerVideoSize;
 
-//   Exams(
-//       {this.id,
-//       this.name,
-//       this.type,
-//       this.examType,
-//       this.backgroundColor,
-//       this.examsFavorite,
-//       this.pdfExamUpload,
-//       this.answerPdfFile,
-//       // this.answerVideoFile,
-//       this.answerVideoIsYoutube,
-//       this.numOfQuestion,
-//       this.totalTime,
-//       this.examPdfSize,
-//       this.answerPdfSize,
-//       this.answerVideoSize});
+  Exams(
+      {this.id,
+      this.name,
+      this.type,
+      this.examType,
+      this.backgroundColor,
+      this.examsFavorite,
+      this.pdfExamUpload,
+      this.answerPdfFile,
+      // this.answerVideoFile,
+      this.answerVideoIsYoutube,
+      this.numOfQuestion,
+      this.totalTime,
+      this.examPdfSize,
+      this.answerPdfSize,
+      this.answerVideoSize});
 
-//   Exams.fromJson(Map<String, dynamic> json) {
-//     id = json['id'];
-//     name = json['name'];
-//     type = json['type'];
-//     examType = json['exam_type'];
-//     backgroundColor = json['background_color'];
-//     examsFavorite = json['exams_favorite'];
-//     pdfExamUpload = json['pdf_exam_upload'];
-//     answerPdfFile = json['answer_pdf_file'];
-//     // answerVideoFile = json['answer_video_file'];
-//     answerVideoIsYoutube = json['answer_video_is_youtube'];
-//     numOfQuestion = json['num_of_question'];
-//     totalTime = json['total_time'];
-//     examPdfSize = json['exam_pdf_size'];
-//     answerPdfSize = json['answer_pdf_size'];
-//     answerVideoSize = json['answer_video_size'];
-//   }
+  Exams.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    name = json['name'];
+    type = json['type'];
+    examType = json['exam_type'];
+    backgroundColor = json['background_color'];
+    examsFavorite = json['exams_favorite'];
+    pdfExamUpload = json['pdf_exam_upload'];
+    answerPdfFile = json['answer_pdf_file'];
+    // answerVideoFile = json['answer_video_file'];
+    answerVideoIsYoutube = json['answer_video_is_youtube'];
+    numOfQuestion = json['num_of_question'];
+    totalTime = json['total_time'];
+    examPdfSize = json['exam_pdf_size'];
+    answerPdfSize = json['answer_pdf_size'];
+    answerVideoSize = json['answer_video_size'];
+  }
 
 
-// }
+}

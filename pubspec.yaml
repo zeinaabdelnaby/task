@@ -35,11 +35,13 @@ dependencies:
   dots_indicator: ^3.0.0
   flutter:
     sdk: flutter
+  flutter_cached_pdfview: ^0.4.2
   flutter_svg: ^2.0.9
   http: ^1.1.0
   page_transition: ^2.1.0
   scroll_controller_direction: ^0.0.6
   shared_preferences: ^2.2.2
+  syncfusion_flutter_pdfviewer: ^24.1.44
   url_launcher: ^6.2.2
 
 dev_dependencies:

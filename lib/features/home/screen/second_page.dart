@@ -1,19 +1,15 @@
-import 'dart:developer';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:flutter/material.dart';
 import 'package:dots_indicator/dots_indicator.dart';
-import 'package:flutter/widgets.dart';
-import 'package:task/controller/data/datasource/static/static.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_cached_pdfview/flutter_cached_pdfview.dart';
+import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 import 'package:task/core/constants/colors.dart';
 import 'package:task/core/constants/image_asset.dart';
-import 'package:task/features/first_page.dart';
 import 'package:task/features/home/widgets/custom_image.dart';
+import 'package:task/features/pdf/pdf_screen.dart';
 import 'package:task/models/home_page_model.dart';
-import 'package:task/models/monthes_model.dart';
 import 'package:task/services/get_home_page_info.dart';
-import 'package:task/services/get_info.dart';
 import 'package:task/widgets/head_and_widget.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class SecondPage extends StatefulWidget {
@@ -28,7 +24,7 @@ class _SecondPageState extends State<SecondPage> {
 
   final _pageController = PageController(initialPage: 0);
 
-  int _page = 0;
+  final int _page = 0;
 
   int maxCount = 5;
 
@@ -107,6 +103,7 @@ class _SecondPageState extends State<SecondPage> {
           },
         ),
       ),
+
       body: Directionality(
         textDirection: TextDirection.rtl,
         child: SingleChildScrollView(
@@ -115,12 +112,13 @@ class _SecondPageState extends State<SecondPage> {
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
                   HomePageModel homePageModel = snapshot.data!;
+                  //  PdfModel pdfModel = ;
                   List imgList = [
                     homePageModel.data!.sliders![0].file.toString(),
                     homePageModel.data!.sliders![1].file.toString(),
                     homePageModel.data!.sliders![2].file.toString(),
                   ];
-                   List linkList = [
+                  List linkList = [
                     homePageModel.data!.sliders![0].link.toString(),
                     homePageModel.data!.sliders![1].link.toString(),
                     homePageModel.data!.sliders![2].link.toString(),
@@ -142,20 +140,28 @@ class _SecondPageState extends State<SecondPage> {
                                 });
                               },
                             ),
-                            items: imgList
-                                .map((item) => Container(
+                            items: homePageModel.data!.sliders!
+                                .map((item) => GestureDetector(
+                                      onTap: () => Navigator.push(
+                                        context,
+                                        MaterialPageRoute<dynamic>(
+                                            builder: (_) => PdfScreen(homePageModel: homePageModel,)
+                                            // PDFViewerFromUrl(
+                                            //   url: homePageModel.data!.classes![0]
+                                            //       .exams![0].answerPdfFile
+                                            //       .toString(),
+                                            // ),
+                                            ),
+                                      ),
                                       child: Center(
-                                          child: GestureDetector(
-                                            onTap: _launchURL,
-                                            child: Image.network(item,
-                                                fit: BoxFit.cover, width: 1000),
-                                          )),
+                                          child: Image.network(item.file!,
+                                              fit: BoxFit.cover, width: 1000)),
                                     ))
                                 .toList(),
                           ),
                           Center(
                             child: DotsIndicator(
-                              dotsCount: imgList.length,
+                              dotsCount: homePageModel.data!.sliders!.length,
                               position: currentIndex,
                               decorator: DotsDecorator(
                                 activeColor: kDividerColor,
@@ -167,48 +173,50 @@ class _SecondPageState extends State<SecondPage> {
                               ),
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 15,
                           ),
                           Center(
-                            child: Card(
-                              elevation: 0,
-                              color: const Color.fromARGB(255, 253, 217, 162),
-                              child: SizedBox(
-                                width: 320,
-                                height: 60,
-                                child: Center(
-                                    child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    const Padding(
-                                      padding: EdgeInsets.all(8.0),
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            "امتحان اللايف",
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                color: Colors.orange,
-                                                fontSize: 18),
-                                          ),
-                                          Text(
-                                            "عندنا امتحان لايف هيبدأ الساعة 10 مساء",
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                color: Colors.grey,
-                                                fontSize: 10),
-                                          )
-                                        ],
+                            child: GestureDetector(
+                              child: Card(
+                                elevation: 0,
+                                color: const Color.fromARGB(255, 253, 217, 162),
+                                child: SizedBox(
+                                  width: 320,
+                                  height: 60,
+                                  child: Center(
+                                      child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      const Padding(
+                                        padding: EdgeInsets.all(8.0),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              "امتحان اللايف",
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  color: Colors.orange,
+                                                  fontSize: 18),
+                                            ),
+                                            Text(
+                                              "عندنا امتحان لايف هيبدأ الساعة 10 مساء",
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  color: Colors.grey,
+                                                  fontSize: 10),
+                                            )
+                                          ],
+                                        ),
                                       ),
-                                    ),
-                                    Image.network(
-                                        "https://www.liveworksheets.com/themes/custom/lively/mstile-310x310.png"),
-                                  ],
-                                )),
+                                      Image.network(
+                                          "https://www.liveworksheets.com/themes/custom/lively/mstile-310x310.png"),
+                                    ],
+                                  )),
+                                ),
                               ),
                             ),
                           ),
@@ -301,11 +309,31 @@ class _SecondPageState extends State<SecondPage> {
       // )
     );
   }
-_launchURL() async {
-   final Uri url = Uri.parse('https://flutter.dev');
-   if (!await launchUrl(url)) {
-        throw Exception('Could not launch $_url');
+
+  _launchURL() async {
+    final Uri url = Uri.parse('https://flutter.dev');
+    if (!await launchUrl(url)) {
+      throw Exception('Could not launch $_url');
     }
-}
+  }
 }
 
+class PDFViewerFromUrl extends StatelessWidget {
+  const PDFViewerFromUrl({Key? key, required this.url}) : super(key: key);
+
+  final String url;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('PDF From Url'),
+      ),
+      body: const PDF().fromUrl(
+        url,
+        placeholder: (double progress) => Center(child: Text('$progress %')),
+        errorWidget: (dynamic error) => Center(child: Text(error.toString())),
+      ),
+    );
+  }
+}
